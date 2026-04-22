@@ -47,3 +47,20 @@ function verificarPalindromo(palavra) {
 console.log(verificarPalindromo("arara")); // true
 console.log(verificarPalindromo("ana"));   // true
 console.log(verificarPalindromo("video")); // false
+
+// 1.3 Verificar palíndromo
+function ehPalindromo(texto) {
+    // 1. Converte para minúsculas para ignorar a diferença (ex: "Ana" vira "ana")
+    const textoMinusculo = texto.toLowerCase();
+    
+    // 2. Inverte o texto (usando a lógica do exercício 1.1)
+    const textoInvertido = textoMinusculo.split("").reverse().join("");
+    
+    // 3. Compara o texto original tratado com o invertido
+    return textoMinusculo === textoInvertido;
+}
+
+// Testes sugeridos
+console.log(ehPalindromo("Ana"));    // true
+console.log(ehPalindromo("arara"));  // true
+console.log(ehPalindromo("casa"));   // false
