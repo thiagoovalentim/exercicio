@@ -9,3 +9,27 @@ function inverterString(texto) {
 // Testes sugeridos no exercício
 console.log(inverterString("javascript")); // "tpircsavaj"
 console.log(inverterString("hello"));      // "olleh"
+
+
+// 1.2 Contar vogais
+function contarVogais(texto) {
+    let contador = 0;
+    const vogais = "aeiou";
+    
+    // Converte o texto para minúsculas para não diferenciar 'A' de 'a'
+    const textoMinusculo = texto.toLowerCase();
+
+    // Percorre cada caractere da string
+    for (let i = 0; i < textoMinusculo.length; i++) {
+        // Verifica se o caractere atual está na lista de vogais
+        if (vogais.includes(textoMinusculo[i])) {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+// Testes sugeridos
+console.log(contarVogais("javascript")); // 3
+console.log(contarVogais("abacaxi"));    // 4
