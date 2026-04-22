@@ -33,3 +33,17 @@ function contarVogais(texto) {
 // Testes sugeridos
 console.log(contarVogais("javascript")); // 3
 console.log(contarVogais("abacaxi"));    // 4
+
+// 1.3 Verificar Palíndromo
+function verificarPalindromo(palavra) {
+    // 1. Inverte a palavra (reaproveitando a lógica do ex 1.1)
+    const palavraInvertida = palavra.split("").reverse().join("");
+    
+    // 2. Compara a original com a invertida
+    return palavra === palavraInvertida;
+}
+
+// Testes para você rodar
+console.log(verificarPalindromo("arara")); // true
+console.log(verificarPalindromo("ana"));   // true
+console.log(verificarPalindromo("video")); // false
