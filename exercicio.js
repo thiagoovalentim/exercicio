@@ -247,3 +247,31 @@ function verificarAprovacao(nota) {
 console.log(verificarAprovacao(85)); // "Aprovado"
 console.log(verificarAprovacao(45)); // "Reprovado"
 console.log(verificarAprovacao(60)); // "Aprovado"
+
+/* 4. Arrow Functions e Template Literals */
+
+// 4.1 Conversor de moeda (Arrow Function)
+const realParaDolar = (reais, cotacao) => {
+    // Calcula a conversão
+    const resultado = reais / cotacao;
+    // Retorna o valor formatado como número com 2 casas decimais
+    return Number(resultado.toFixed(2));
+};
+
+// Testes do exercício (usando a cotação de 4.95)
+console.log(realParaDolar(100, 4.95)); // Saída: 20.20
+console.log(realParaDolar(500, 4.95)); // Saída: 101.01
+console.log(realParaDolar(1000, 4.95)); // Saída: 202.02
+
+// 4.2 Mensagem personalizada
+const gerarMensagem = (nome, idade, cidade) => {
+    // As crases ( ` ) permitem o uso de ${}
+    return `Olá, meu nome é ${nome}, tenho ${idade} anos e moro em ${cidade}.`;
+}
+
+// Testes do exercício
+console.log(gerarMensagem("Maria", 22, "Ipatinga"));
+// Saída: "Olá, meu nome é Maria, tenho 22 anos e moro em Ipatinga."
+
+console.log(gerarMensagem("Thiago", 22, "Ipatinga"));
+// Saída: "Olá, meu nome é Thiago, tenho 22 anos e moro em Ipatinga."
