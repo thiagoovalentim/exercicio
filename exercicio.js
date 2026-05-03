@@ -6,7 +6,7 @@ function inverterString(texto) {
     return texto.split("").reverse().join("");
 }
 
-// Testes sugeridos no exercício
+// Testes do exercício
 console.log(inverterString("javascript")); // "tpircsavaj"
 console.log(inverterString("hello"));      // "olleh"
 
@@ -30,7 +30,7 @@ function contarVogais(texto) {
     return contador;
 }
 
-// Testes sugeridos
+// Testes do exercício
 console.log(contarVogais("javascript")); // 3
 console.log(contarVogais("abacaxi"));    // 4
 
@@ -64,3 +64,22 @@ function ehPalindromo(texto) {
 console.log(ehPalindromo("Ana"));    // true
 console.log(ehPalindromo("arara"));  // true
 console.log(ehPalindromo("casa"));   // false
+
+// 1.4 Capitalizar palavras
+function capitalizarPalavras(frase) {
+    // 1. Separa a frase em um array de palavras usando o espaço como divisor
+    const palavras = frase.split(" ");
+
+    // 2. Cria um novo array com as palavras modificadas
+    const palavrasCapitalizadas = palavras.map(palavra => {
+        // Pega a primeira letra (maiúscula) e junta com o restante da palavra
+        return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+    });
+
+    // 3. Junta as palavras novamente em uma única string, separadas por espaço
+    return palavrasCapitalizadas.join(" ");
+}
+
+// Testes F2
+console.log(capitalizarPalavras("olá mundo"));             // "Olá Mundo"
+console.log(capitalizarPalavras("sistemas web é legal"));  // "Sistemas Web É Legal"
