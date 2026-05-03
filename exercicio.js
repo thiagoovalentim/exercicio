@@ -83,3 +83,80 @@ function capitalizarPalavras(frase) {
 // Testes F2
 console.log(capitalizarPalavras("olá mundo"));             // "Olá Mundo"
 console.log(capitalizarPalavras("sistemas web é legal"));  // "Sistemas Web É Legal"
+
+// 2.1 Ficha do aluno
+function criarAluno(nome, idade, curso) {
+    // Retorna um objeto "empacotando" os dados recebidos como propriedades
+    return {
+        nome: nome,
+        idade: idade,
+        curso: curso
+    };
+}
+
+// Testes sugeridos
+let aluno = criarAluno("Thiago", 26, "Sistemas de Informação");
+console.log(aluno); 
+// Saída esperada: { nome: "Thiago", idade: 26, curso: "Sistemas de Informação" }
+
+// 2.2 Calculadora de IMC
+function calcularIMC(nome, peso, altura) {
+    // 1. Calcula o IMC usando a fórmula: peso / (altura * altura)
+    const imc = peso / (altura * altura);
+
+    let classificacao;
+
+    // 2. Define a classificação com base no valor do IMC
+    if (imc < 18.5) {
+        classificacao = "Abaixo do peso";
+    } else if (imc < 25) {
+        classificacao = "Peso normal";
+    } else if (imc < 30) {
+        classificacao = "Sobrepeso";
+    } else {
+        classificacao = "Obesidade";
+    }
+
+    // 3. Retorna um objeto com os dados
+    return {
+        nome: nome,
+        imc: Number(imc.toFixed(2)), // limita para 2 casas decimais
+        classificacao: classificacao
+    };
+}
+
+// Testes do exercício
+let pessoa1 = calcularIMC("João", 75, 1.80);
+console.log(pessoa1);
+// { nome: "João", imc: 23.15, classificacao: "Peso normal" }
+
+let pessoa2 = calcularIMC("Ana", 50, 1.60);
+console.log(pessoa2);
+// { nome: "Ana", imc: 19.53, classificacao: "Peso normal" }
+
+// 2.3 Lista de contatos
+function buscarContato(contatos, nome) {
+    // Percorre o array de contatos
+    for (let i = 0; i < contatos.length; i++) {
+        // Verifica se o nome do contato atual é igual ao nome buscado
+        if (contatos[i].nome === nome) {
+            return contatos[i]; // Retorna o objeto encontrado
+        }
+    }
+
+    // Se não encontrar nenhum contato, retorna null
+    return null;
+}
+
+// Testes do exercício
+let contatos = [
+    { nome: "Ana", telefone: "1111-1111" },
+    { nome: "Bruno", telefone: "2222-2222" },
+    { nome: "Carlos", telefone: "3333-3333" }
+];
+
+console.log(buscarContato(contatos, "Bruno"));
+// { nome: "Bruno", telefone: "2222-2222" }
+
+console.log(buscarContato(contatos, "Diana"));
+// null
