@@ -160,3 +160,90 @@ console.log(buscarContato(contatos, "Bruno"));
 
 console.log(buscarContato(contatos, "Diana"));
 // null
+
+/* 3. Switch e Operador Ternário */
+
+// 3.1 Dia da semana
+function diaDaSemana(numero) {
+    let dia;
+
+    // Estrutura switch para verificar o número
+    switch (numero) {
+        case 1:
+            dia = "Domingo";
+            break;
+        case 2:
+            dia = "Segunda-feira";
+            break;
+        case 3:
+            dia = "Terça-feira";
+            break;
+        case 4:
+            dia = "Quarta-feira";
+            break;
+        case 5:
+            dia = "Quinta-feira";
+            break;
+        case 6:
+            dia = "Sexta-feira";
+            break;
+        case 7:
+            dia = "Sábado";
+            break;
+        default:
+            dia = "Dia inválido";
+    }
+
+    return dia;
+}
+
+// Testes do exercício
+console.log(diaDaSemana(1)); // "Domingo"
+console.log(diaDaSemana(4)); // "Quarta-feira"
+console.log(diaDaSemana(9)); // "Dia inválido"
+
+// 3.2 Calculadora com switch
+function calculadora(num1, num2, operacao) {
+    let resultado;
+
+    switch (operacao) {
+        case "+":
+            resultado = num1 + num2;
+            break;
+        case "-":
+            resultado = num1 - num2;
+            break;
+        case "*":
+            resultado = num1 * num2;
+            break;
+        case "/":
+            // Verifica divisão por zero
+            if (num2 === 0) {
+                return "Erro: divisão por zero";
+            }
+            resultado = num1 / num2;
+            break;
+        default:
+            return "Operação inválida";
+    }
+
+    return resultado;
+}
+
+// Testes do exercício
+console.log(calculadora(10, 5, "+")); // 15
+console.log(calculadora(10, 5, "-")); // 5
+console.log(calculadora(10, 0, "/")); // "Erro: divisão por zero"
+console.log(calculadora(10, 5, "%")); // "Operação inválida"
+
+// 3.3 Verificar aprovação
+function verificarAprovacao(nota) {
+    // O operador ternário funciona como um if/else em uma única linha
+    // condicao ? valorSeVerdadeiro : valorSeFalso
+    return nota >= 60 ? "Aprovado" : "Reprovado";
+}
+
+// Testes sugeridos
+console.log(verificarAprovacao(85)); // "Aprovado"
+console.log(verificarAprovacao(45)); // "Reprovado"
+console.log(verificarAprovacao(60)); // "Aprovado"
