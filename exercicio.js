@@ -324,3 +324,187 @@ console.log(buscarProduto(produtos, 2));
 
 console.log(buscarProduto(produtos, 5));
 // Saída: undefined
+
+/* Desafios */
+
+// 6.1 Validar senha
+function validarSenha(senha) {
+    let erros = [];
+
+    // 1. Ter pelo menos 8 caracteres
+    if (senha.length < 8) {
+        erros.push("Mínimo 8 caracteres");
+    }
+
+    // 2. Ter pelo menos uma letra maiúscula
+    // O método .toLowerCase() transforma tudo em minúsculo; 
+    // se a senha for igual à sua versão minúscula, significa que não tem nenhuma maiúscula.
+    if (senha === senha.toLowerCase()) {
+        erros.push("Falta letra maiúscula");
+    }
+
+    // 3. Ter pelo menos uma letra minúscula
+    if (senha === senha.toUpperCase()) {
+        erros.push("Falta letra minúscula");
+    }
+
+    // 4. Ter pelo menos um número
+    // Usamos um loop simples para verificar se algum caractere é um número
+    let temNumero = false;
+    for (let caractere of senha) {
+        if (!isNaN(caractere) && caractere !== " ") {
+            temNumero = true;
+            break;
+        }
+    }
+    
+    if (!temNumero) {
+        erros.push("Falta número");
+    }
+
+    // Retorna o objeto com o resultado final
+    return {
+        valida: erros.length === 0,
+        erros: erros
+    };
+}
+
+// Testes do desafio
+console.log(validarSenha("Abc12345")); 
+// { valida: true, erros: [] }
+
+console.log(validarSenha("abc")); 
+// { valida: false, erros: ["Mínimo 8 caracteres", "Falta letra maiúscula", "Falta número"] }
+
+// 6.2 Cifra de César
+function cifrarCesar(texto, deslocamento) {
+    let resultado = "";
+
+    for (let i = 0; i < texto.length; i++) {
+        let codigo = texto.charCodeAt(i);
+
+        // Verifica se é uma letra minúscula (entre 'a' = 97 e 'z' = 122)
+        if (codigo >= 97 && codigo <= 122) {
+            // Aplica o deslocamento e usa o operador de resto (%) para voltar ao 'a' se passar de 'z'
+            // A fórmula (codigo - 97 + deslocamento) % 26 + 97 garante que fique dentro do alfabeto
+            let novoCodigo = ((codigo - 97 + deslocamento) % 26) + 97;
+            resultado += String.fromCharCode(novoCodigo);
+        } else {
+            // Mantém espaços e outros caracteres inalterados
+            resultado += texto[i];
+        }
+    }
+
+    return resultado;
+}
+
+// Testes do desafio
+console.log(cifrarCesar("abc", 3));            // "def"
+console.log(cifrarCesar("xyz", 3));            // "abc"
+console.log(cifrarCesar("hello world", 5));    // "mjqqt btwqi"
+
+// 6.3 Ordenar alunos por nota
+function ordenarPorNota(alunos) {
+    // O método sort altera o array original. 
+    // Para ordem decrescente (maior para menor), usamos (b - a).
+    return alunos.sort((a, b) => b.nota - a.nota);
+}
+
+// Testes do desafio
+let alunos = [
+    { nome: "Ana", nota: 7.5 },
+    { nome: "Bruno", nota: 9.0 },
+    { nome: "Carlos", nota: 6.0 },
+    { nome: "Diana", nota: 8.5 }
+];
+
+console.log(ordenarPorNota(alunos));
+/* Saída esperada:
+[
+  { nome: "Bruno", nota: 9.0 },
+  { nome: "Diana", nota: 8.5 },
+  { nome: "Ana", nota: 7.5 },
+  { nome: "Carlos", nota: 6.0 }
+]
+*/
+
+// 6.4 Remover duplicados (Maneira 1: Filter)
+function removerDuplicados(array) {
+    return array.filter((item, index) => {
+        // O indexOf sempre retorna a PRIMEIRA vez que o item aparece.
+        // Se o index atual for igual ao primeiro index encontrado, o item fica.
+        return array.indexOf(item) === index;
+    });
+}
+
+// 6.4 Remover duplicados
+function removerDuplicados(array) {
+    // Maneira 1: Usando filter e indexOf
+    // O filter percorre o array e o indexOf retorna a primeira ocorrência do item.
+    // Se o índice atual for igual à primeira ocorrência, o item é único no novo array.
+    const usandoFilter = array.filter((item, index) => array.indexOf(item) === index);
+
+    // Maneira 2: Usando Set (Estrutura de valores únicos)
+    // O Set remove duplicatas automaticamente. O spread [...] converte de volta para array.
+    const usandoSet = [...new Set(array)];
+
+    // Retornamos um dos resultados (ambos produzem o mesmo output)
+    return usandoSet;
+}
+
+// --- Testes do Desafio ---
+
+// Teste com Números
+console.log(removerDuplicados([1, 2, 2, 3, 4, 4, 5])); 
+// Saída: [1, 2, 3, 4, 5]
+
+// Teste com Strings
+console.log(removerDuplicados(["a", "b", "a", "c", "b"])); 
+// Saída: ["a", "b", "c"]
+
+// 6.5 Média da turma
+function relatorioTurma(alunos) {
+    // 1. Calcula a média usando reduce() para somar todas as notas
+    // O acumulador (soma) começa em 0 e vai somando cada nota
+    const media = alunos.reduce((soma, aluno) => soma + aluno.nota, 0) / alunos.length;
+
+    // 2. Encontra o aluno com maior nota usando reduce()
+    // Compara o acumulador com o aluno atual, mantendo sempre o de maior nota
+    const melhorAluno = alunos.reduce((melhor, aluno) => 
+        aluno.nota > melhor.nota ? aluno : melhor
+    );
+
+    // 3. Encontra o aluno com menor nota usando reduce()
+    // Mesma lógica do melhor, mas mantendo sempre o de menor nota
+    const piorAluno = alunos.reduce((pior, aluno) => 
+        aluno.nota < pior.nota ? aluno : pior
+    );
+
+    // 4. Conta os aprovados (nota >= 60) usando filter()
+    const aprovados = alunos.filter(aluno => aluno.nota >= 60).length;
+
+    // Retorna o objeto com todos os resultados
+    return {
+        media: Number(media.toFixed(1)),
+        melhorAluno: melhorAluno,
+        piorAluno: piorAluno,
+        aprovados: aprovados
+    };
+}
+
+// Testes do exercício
+let turma = [
+    { nome: "Ana",     nota: 85 },
+    { nome: "Bruno",   nota: 42 },
+    { nome: "Carlos",  nota: 70 },
+    { nome: "Diana",   nota: 95 },
+    { nome: "Eduardo", nota: 55 }
+];
+
+console.log(relatorioTurma(turma));
+// {
+//   media: 69.4,
+//   melhorAluno: { nome: "Diana",  nota: 95 },
+//   piorAluno:   { nome: "Bruno",  nota: 42 },
+//   aprovados: 3
+// }
