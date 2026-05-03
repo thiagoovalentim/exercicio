@@ -275,3 +275,52 @@ console.log(gerarMensagem("Maria", 22, "Ipatinga"));
 
 console.log(gerarMensagem("Thiago", 22, "Ipatinga"));
 // Saída: "Olá, meu nome é Thiago, tenho 22 anos e moro em Ipatinga."
+
+/*5. Métodos de Array */ 
+
+// 5.1 Dobrar valores com map
+function dobrarValores(numeros) {
+    // .map() percorre cada elemento do array e retorna um novo array
+    // com o resultado da função aplicada a cada elemento (x * 2)
+    return numeros.map(x => x * 2);
+}
+
+// Testes do exercício
+console.log(dobrarValores([1, 2, 3, 4, 5])); // [2, 4, 6, 8, 10]
+console.log(dobrarValores([10, 20, 30]));     // [20, 40, 60]
+
+// 5.2 Filtrar maiores de idade
+function filtrarMaiores(pessoas) {
+    // O método filter cria um novo array apenas com os elementos que atendem à condição
+    return pessoas.filter(p => p.idade >= 18);
+}
+
+// Testes do exercício
+let pessoas = [
+    { nome: "Ana", idade: 22 },
+    { nome: "Bruno", idade: 15 },
+    { nome: "Carlos", idade: 30 },
+    { nome: "Diana", idade: 17 }
+];
+
+console.log(filtrarMaiores(pessoas));
+// Saída: [{ nome: "Ana", idade: 22 }, { nome: "Carlos", idade: 30 }]
+
+// 5.3 Buscar produto por ID
+function buscarProduto(produtos, id) {
+    // O método find retorna o primeiro elemento que satisfaz a condição
+    return produtos.find(p => p.id === id);
+}
+
+// Testes do exercício
+let produtos = [
+    { id: 1, nome: "Camiseta", preco: 49.90 },
+    { id: 2, nome: "Calça", preco: 89.90 },
+    { id: 3, nome: "Tênis", preco: 199.90 }
+];
+
+console.log(buscarProduto(produtos, 2));
+// Saída: { id: 2, nome: "Calça", preco: 89.90 }
+
+console.log(buscarProduto(produtos, 5));
+// Saída: undefined
